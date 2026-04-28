@@ -6,7 +6,7 @@ router = APIRouter(prefix="", tags=["carton-counter"])
 
 
 @router.get("/get-object-counts")
-async def get_object_counts(object_to_count: str):
+async def get_object_counts(object_to_count: str, image_base64: str):
     if object_to_count.lower() != "carton":
         return {
             "success": False,
