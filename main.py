@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from router import router
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
+app = FastAPI(title="Carton-Counter", version="1.2.0")
 
 # CORS
 app.add_middleware(
