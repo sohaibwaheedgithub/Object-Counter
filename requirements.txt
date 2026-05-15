@@ -3,5 +3,5 @@ uvicorn==0.38.0
 # ultralytics>=8.4.0
 # opencv-python-headless
 # supervision
-# pillow
+pillow
 # matplotlib
