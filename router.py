@@ -1,12 +1,10 @@
 from fastapi import APIRouter
 from typing import Literal, Optional
-#import supervision as sv
 import base64
 from io import BytesIO
 from PIL import Image
 from pydantic import BaseModel
 #from detection import detect_objects
-#from utils.annotation import annotate
 
 router = APIRouter(prefix="", tags=["carton-counter"])
 
@@ -22,20 +20,21 @@ class RequestBody(BaseModel):
 async def get_object_counts(payload: RequestBody):
     if payload.object_to_count.lower() != "carton":
         return {
-            "success": False,
-            "data": None,
-            "message": f"{payload.object_to_count} currently not Supported"
+            "header": {
+                "success": False,
+                "message": f"{payload.object_to_count} currently not Supported"
+            }
         }
     else:
         image = Image.open(BytesIO(base64.b64decode(payload.image_base64)))
-        image.show()
+
         #n_cartons = detect_objects(image)
 
         return {
-            "success": True,
-            "data": {
+            "header": {
+                "success": True,
                 "Object": payload.object_to_count.title(),
-                "Counts": 0
-            },
-            "message": None
+                "Counts": 0,
+                "message": None
+            }
         }
