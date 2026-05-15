@@ -3,9 +3,10 @@ from typing import Literal
 #import supervision as sv
 import base64
 from io import BytesIO
-#from PIL import Image
+from PIL import Image
 from typing import TypedDict
 #from detection import detect_objects
+#from utils.annotation import annotate
 
 router = APIRouter(prefix="", tags=["carton-counter"])
 
@@ -21,11 +22,9 @@ class RequestBody(TypedDict):
 async def get_object_counts(payload: RequestBody):
     if payload["object_to_count"].lower() != "carton":
         return {
-            "header": {
-                "success": False,
-                "data": None,
-                "message": f"{payload["object_to_count"]} currently not Supported"
-            }
+            "success": False,
+            "data": None,
+            "message": f"{payload["object_to_count"]} currently not Supported"
         }
     else:
 
@@ -37,17 +36,15 @@ async def get_object_counts(payload: RequestBody):
         # image_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
         
         
-        #image = Image.open(BytesIO(base64.b64decode(payload["image_base64"])))
+        # image = Image.open(BytesIO(base64.b64decode(payload["image_base64"])))
         
-        #n_cartons = detect_objects(image)
+        # n_cartons = detect_objects(image)
 
         return {
-            "header": {
-                "success": True,
-                "data": {
-                    "Object": payload["object_to_count"].title(),
-                    "Counts": 0
-                },
-                "message": None
-            }
+            "success": True,
+            "data": {
+                "Object": payload["object_to_count"].title(),
+                "Counts": 0
+            },
+            "message": None
         }
