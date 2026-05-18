@@ -4,7 +4,7 @@ import base64
 from io import BytesIO
 from PIL import Image
 from pydantic import BaseModel
-#from detection import detect_objects
+from detection import detect_objects
 
 router = APIRouter(prefix="", tags=["carton-counter"])
 
@@ -28,13 +28,13 @@ async def get_object_counts(payload: RequestBody):
     else:
         image = Image.open(BytesIO(base64.b64decode(payload.image_base64)))
 
-        #n_cartons = detect_objects(image)
+        n_cartons = detect_objects(image)
 
         return {
             "header": {
                 "success": True,
                 "Object": payload.object_to_count.title(),
-                "Counts": 0,
+                "Counts": n_cartons,
                 "message": None
             }
         }

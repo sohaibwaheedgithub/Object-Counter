@@ -1,10 +1,11 @@
-# import colorsys
-# import supervision as sv
-# from PIL import Image
-# from ultralytics import YOLO
-# import matplotlib.pyplot as plt
-# import supervision as sv
-# from PIL import Image
+import colorsys
+import supervision as sv
+from PIL import Image
+from ultralytics import YOLO
+import matplotlib.pyplot as plt
+import supervision as sv
+from PIL import Image
+
 
 
 
@@ -50,21 +51,34 @@
 
 
 
-# model = YOLO('new_weights/best.pt')
-# #model = YOLO('weights/last.pt')
+# model = YOLO('model/best.pt')
 
 # def detect_objects(image):
 
 #     result = model.predict(image, verbose=False, conf=0.50)[0]
 #     detections = sv.Detections.from_ultralytics(result)
 #     detections = detections.with_nms(threshold=0.50, class_agnostic=True)
-#     ann_img = annotate(image, detections)
-        
-#     return len(detections), ann_img
+    
+#     return len(detections)
 
 
-# l, i = detect_objects(Image.open(r"C:\Users\EXPK0322\OneDrive - Pakistan Oxygen Limited\Carton Images\Container Carton Pics\1772077019250.jpg"))
+# l = detect_objects(Image.open(r"C:\Users\EXPK0322\OneDrive - Pakistan Oxygen Limited\Carton Images\Container Carton Pics\1772077019250.jpg"))
 # print("No of cartons: ", l)
-# i.show()
 
 
+
+
+model = YOLO('model/best.pt')
+
+def detect_objects(image):
+
+    result = model.predict(image, verbose=False, conf=0.40)[0]
+    detections = sv.Detections.from_ultralytics(result)
+    detections = detections.with_nms(threshold=0.50, class_agnostic=True)
+
+    # unsure = False
+    # for d in detections:
+    #     if (d[2] <= 0.50) and ():
+    #         unsure = True
+        
+    return len(detections)
