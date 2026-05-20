@@ -26,6 +26,7 @@ from PIL import Image
 #         colors.append(
 #             f"#{int(red * 255):02x}{int(green * 255):02x}{int(blue * 255):02x}"
 #         )
+        
 
 #     color = sv.ColorPalette.from_hex(colors)
 
@@ -55,15 +56,18 @@ from PIL import Image
 
 # def detect_objects(image):
 
-#     result = model.predict(image, verbose=False, conf=0.50)[0]
+#     result = model.predict(image, verbose=False, conf=0.30)[0]
 #     detections = sv.Detections.from_ultralytics(result)
 #     detections = detections.with_nms(threshold=0.50, class_agnostic=True)
+#     ann_img = annotate(image, detections)
     
-#     return len(detections)
+#     return len(detections), ann_img
 
 
-# l = detect_objects(Image.open(r"C:\Users\EXPK0322\OneDrive - Pakistan Oxygen Limited\Carton Images\Container Carton Pics\1772077019250.jpg"))
+# l, i = detect_objects(Image.open(r"C:\Users\EXPK0322\OneDrive - Pakistan Oxygen Limited\Carton Images\Container Carton Pics\1772077019023.jpg"))
 # print("No of cartons: ", l)
+# i.show()
+
 
 
 
@@ -72,7 +76,7 @@ model = YOLO('model/best.pt')
 
 def detect_objects(image):
 
-    result = model.predict(image, verbose=False, conf=0.40)[0]
+    result = model.predict(image, verbose=False, conf=0.30)[0]
     detections = sv.Detections.from_ultralytics(result)
     detections = detections.with_nms(threshold=0.50, class_agnostic=True)
 
