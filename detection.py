@@ -55,8 +55,8 @@ from PIL import Image
 # model = YOLO('model/best.pt')
 
 # def detect_objects(image):
-
 #     result = model.predict(image, verbose=False, conf=0.30)[0]
+
 #     detections = sv.Detections.from_ultralytics(result)
 #     detections = detections.with_nms(threshold=0.50, class_agnostic=True)
 #     ann_img = annotate(image, detections)
@@ -64,7 +64,7 @@ from PIL import Image
 #     return len(detections), ann_img
 
 
-# l, i = detect_objects(Image.open(r"C:\Users\EXPK0322\OneDrive - Pakistan Oxygen Limited\Carton Images\Container Carton Pics\1772077019023.jpg"))
+# l, i = detect_objects(Image.open(r"C:\Users\EXPK0322\Desktop\Projects\Object-Counter\more_new_images\IMG_5596.JPG"))
 # print("No of cartons: ", l)
 # i.show()
 
@@ -79,10 +79,5 @@ def detect_objects(image):
     result = model.predict(image, verbose=False, conf=0.30)[0]
     detections = sv.Detections.from_ultralytics(result)
     detections = detections.with_nms(threshold=0.50, class_agnostic=True)
-
-    # unsure = False
-    # for d in detections:
-    #     if (d[2] <= 0.50) and ():
-    #         unsure = True
         
     return len(detections)
